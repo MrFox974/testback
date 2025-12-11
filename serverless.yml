@@ -1,0 +1,23 @@
+service: backend-lambda
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: ap-southeast-2
+  stage: dev
+  environment:
+    NODE_ENV: production
+
+functions:
+  api:
+    handler: handler.handler
+    url:
+      authType: NONE
+      cors: true
+    events:
+      - http:
+          path: /
+          method: ANY
+      - http:
+          path: /{proxy+}
+          method: ANY
